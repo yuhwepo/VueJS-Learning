@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="content">
+                <div class="content-header flex justify-between">
+                    <input type="search" placeholder="Search User" class="border-2 px-2 py-2" v-model="searchQuery">
+                    <button class="btn btn-add bg-blue-700 text-white px-3 py-3 rounded hover:bg-blue-600"
+                        @click="addNewUser()">
+                        + Create New
+                    </button>
+                </div>
+                <div class="content-body mt-10">
+                    <table class="table table-hover w-full">
+                        <thead>
+                            <tr>
+                                <th v-for="(col, index) in tableColumns"
+                                    :id="col ? `id_${col.replace(/\s+/g, '-')}` : ''" :key="index"
+                                    class="uppercase font-bold px-2 py-2 text-start">
+                                    {{ col }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(row, index) in filteredUsers" :key="row" class="border-b-2 border-gray-200">
+                                <td ::key="row.user" class="px-2 py-2">
+                                    <div class="flex items-center">
+                                        <img class="w-14 h-14 rounded-full mr-2" :src="row.avatar" alt="User Avatar">
+                                        <div>
+                                            <div class="font-medium">{{ row.name }}</div>
+                                            <div class="text-gray-500">{{ row.email }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td :key="row.role" class="px-2 py-2 capitalize">{{ row.role }}</td>
+                                <td :key="row.status" class="px-2 py-2 capitalize">
+                                    <span class="rounded px-2 py-2 text-white"
+                                        :class="row.status == 'active' ? 'bg-green-400' : 'bg-red-400' ">
+                                        {{ row.status }}
+                                    </span>
+                                </td>
+                                <td :key="row.lastActivity" class="px-2 py-2">{{ row.lastActivity }}</td>
+                                <td :key="row.joinDate" class="px-2 py-2">{{ new Date(row.joinDate).toLocaleDateString()
+                                    }}</td>
+                                <td class="relative">
+                                    <button type="button"
+                                        class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white rounded-md bg-gray-500 hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                                        @click.stop="showPopup2(row.id)">
+                                        Actions
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div :id="'action-' + row.id" data-display="none"
+                                        class="popup hidden absolute right-0 w-32 mt-1 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50 focus:outline-none">
+                                        <div class="px-1 py-1 popup">
+                                            <button
+                                                class="popup hover:bg-gray-400 hover:text-white text-gray-900 group flex rounded-md items-center w-full px-2 py-2 text-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="popup w-5 h-5 mr-2 text-violet-400" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button
+                                                class="popup hover:bg-red-400 hover:text-white text-gray-900 group flex rounded-md items-center w-full px-2 py-2 text-sm"
+                                                @click="onDelete(row.id)">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="popup w-5 h-5 mr-2 text-violet-400" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <!-- <td :key="row.actions" class="px-2 py-2">Actions</td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./main.js"></script>
+
+</html>

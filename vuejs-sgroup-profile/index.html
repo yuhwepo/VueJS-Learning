@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="app" class="bg-slate-400 p-5">
+        <div class="container bg-white rounded-2xl p-8">
+            <form action="" class="">
+                <div class="form-header flex flex-col gap-5 border-b-gray-400 border-b">
+                    <div class="form-title font-bold text-lg">
+                        Account details
+                    </div>
+                    <div class="form-profile flex gap-5 pb-5">
+                        <div class="profile-avt w-32 h-32">
+                            <img src="https://i.pravatar.cc/300" alt="" class="rounded-lg">
+                        </div>
+                        <div class="upload-desc flex flex-col gap-5">
+                            <button class="upload-avt bg-green-500 p-3 rounded-lg text-white w-fit">
+                                Upload new photo
+                            </button>
+                            <p class="upload-desc-text">
+                                Allowed JPG, GIF or PNG, Max size of 800KB
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-body py-5 flex-col flex gap-5">
+                    <input type="text" placeholder="Full name" class="p-2 border border-gray-100 rounded-lg">
+                    <input type="email" placeholder="Email" class="p-2 border border-gray-100 rounded-lg">
+                    <select name="location" id="location" class="p-2 border border-gray-100 rounded-lg">
+                        <option value="">Ha Noi</option>
+                        <option value="">Da Nang</option>
+                        <option value="">Ho Chi Minh</option>
+                    </select>
+                    <div class="course-container flex flex-col  gap-2 p-2 border border-gray-100 rounded-lg">
+                        <label for="course-it" class="flex justify-between ml-5">
+                            IT
+                            <input id="course-it" type="checkbox" name="">
+                        </label>
+                        <label for="course-ds" class="flex justify-between ml-5">
+                            DS
+                            <input id="course-ds" type="checkbox" name="">
+                        </label>
+                        <label for="course-mo" class="flex justify-between ml-5">
+                            MO
+                            <input id="course-mo" type="checkbox" name="">
+                        </label>
+                    </div>
+                    <div class="gender-container flex flex-col  gap-2 p-2 border border-gray-100 rounded-lg">
+                        <label for="gender-male" class="flex justify-between ml-5">
+                            Male
+                            <input id="gender-male" type="radio" name="gender">
+                        </label>
+                        <label for="gender-female" class="flex justify-between ml-5">
+                            Female
+                            <input id="gender-female" type="radio" name="gender">
+                        </label>
+                        <label for="gender-unspecified" class="flex justify-between ml-5">
+                            Unspecified
+                            <input id="gender-unspecified" type="radio" name="gender">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-footer flex gap-5">
+                    <button class="btn btn-save uppercase bg-green-400 p-3 text-white rounded-lg" type="submit">
+                        Save Changes
+                    </button>
+                    <button class="btn btn-reset bg-slate-400 text-white p-3 rounded-lg uppercase">
+                        Reset
+                    </button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="./main.js"></script>
+
+</html>
